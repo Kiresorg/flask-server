@@ -1,0 +1,47 @@
+### root of app
+
+
+### Register
+
+POST http://localhost:5000/api/users/register
+Content-Type: application/json
+
+{
+    "username": "erik",
+    "password": "password",
+    "email": "erik@foobar.com"
+}
+
+### Login
+POST http://localhost:5000/api/users/login
+Content-Type: application/json
+
+{
+    "password":"password", 
+    "email":"erik@foobar.com"
+}
+
+### Get sales totals for a given number of weeks, cumulative (uses one large function)
+POST  http://localhost:5000/api/sales/totals
+Content-Type: application/json
+
+{
+    "weeks": "1"
+}
+
+### Get sales totals for a given number of weeks, cumulative
+POST  http://localhost:5000/api/sales/totals2
+Content-Type: application/json
+
+{
+    "weeks": "1"
+}
+
+### Get sales total by week, for a given number of weeks
+
+POST  http://localhost:5000/api/sales/weekly
+Content-Type: application/json
+
+{
+    "weeks": "2"
+}

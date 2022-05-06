@@ -6,6 +6,7 @@ Copyright (c) 2019 - present AppSeed.us
 from datetime import datetime, timezone, timedelta
 
 from functools import wraps
+import json
 
 from flask import request
 from flask_restx import Api, Resource, fields
@@ -14,6 +15,8 @@ import jwt
 
 from .models import db, Users, JWTTokenBlocklist
 from .config import BaseConfig
+
+from .controllers import getSalesData, sumWeeklySalesFigures, avgDailySales, getSalesFigures, weeklySalesTotals
 
 rest_api = Api(version="1.0", title="Users API")
 
@@ -192,3 +195,49 @@ class LogoutUser(Resource):
         self.save()
 
         return {"success": True}, 200
+
+@rest_api.route('/api/sales/totals')
+class CalculateTotals(Resource):
+    """
+        Calculates sales totals for the last week, using one large method
+    """
+
+    def post(self):
+        req_data = request.get_json()
+        _weeks = int(req_data.get("weeks"))
+
+        salesFigures = getSalesData(_weeks)
+
+        return { "total_sales": json.dumps(salesFigures[0]), "avg_daily_sales": json.dumps(salesFigures[1]) }, 200
+
+@rest_api.route('/api/sales/totals2')
+class CalculateTotals(Resource):
+    """
+        Calculates sales totals for the last week, using individual methods
+    """
+
+    def post(self):
+        req_data = request.get_json()
+        _weeks = int(req_data.get("weeks"))
+
+        sales_records = getSalesFigures(_weeks)
+        total = sumWeeklySalesFigures(_weeks, sales_records)
+
+        avg = avgDailySales(total, _weeks)
+
+        return { "total_sales": json.dumps(total), "avg_daily_sales": json.dumps(avg) }, 200
+
+@rest_api.route('/api/sales/weekly')
+class CalculateTotals(Resource):
+    """
+        Calculates weekly sales totals for a given number of weeks
+    """
+
+    def post(self):
+        req_data = request.get_json()
+        _weeks = int(req_data.get("weeks"))
+
+        sales_records = getSalesFigures(_weeks)
+        weeklyTotals = weeklySalesTotals(sales_records)
+
+        return json.dumps(weeklyTotals), 200
