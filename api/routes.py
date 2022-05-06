@@ -220,9 +220,13 @@ class CalculateTotals(Resource):
         req_data = request.get_json()
         _weeks = int(req_data.get("weeks"))
 
+        """ call the dB to get sales figures"""
         sales_records = getSalesFigures(_weeks)
+
+        """ get total sales durign that period"""
         total = sumWeeklySalesFigures(_weeks, sales_records)
 
+        """ calculate average daily sale for that period"""
         avg = avgDailySales(total, _weeks)
 
         return { "total_sales": json.dumps(total), "avg_daily_sales": json.dumps(avg) }, 200

@@ -2,7 +2,7 @@ from pyparsing import restOfLine
 
 
 """
-    simulates databse call for weekly sales figures
+    simulates database call for weekly sales figures
     each row is arranged Sunday to Saturday
 """
 mock_db_call = [
@@ -53,10 +53,7 @@ def getSalesFigures(numWeeks):
 """
 def sumWeeklySalesFigures(numWeeks, salesFiguresFromDB):
     totalSales = 0
-    """
-        mock dB call
-    """
-
+    
     if(numWeeks > 0 and numWeeks <= len(salesFiguresFromDB)):
         index = 0
 
