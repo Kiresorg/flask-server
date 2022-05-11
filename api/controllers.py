@@ -7,6 +7,7 @@ from sqlalchemy import null
     each row is arranged Sunday to Saturday
 """
 mock_database_sales_table = [
+    [1,1,1,1,1,1,1],
     [8050.22, 5009.98, 3467.19, 7300.22, 1292.33, 988.45, 12359.87],
     [11030.11, 6049.45, 6461.67, 7280.19, 1162.51, 481.95, 17460.78],
     [4302.37, 5477.48, 4467.19, 5400.82, 1697.73, 888.54, 14759.32],
@@ -52,11 +53,18 @@ def getSalesData(weeks):
 """
     Mocks a database call for sales figures
 """
-def getSalesFigures():
+def getSalesFigures(weeks):
+    if weeks <= 0:
+        raise ValueError("You must request a positive number of weeks")
+        
+    """ if more weeks are requested than exist, return all weeks avalable """
+    if(weeks > len(mock_database_sales_table)):
+        weeks = len(mock_database_sales_table)
+    
     index = 0
     result = []
-
-    while index < len(mock_database_sales_table):
+    
+    while index < weeks:
         result.append(mock_database_sales_table[index])
         index += 1
     return result
@@ -85,11 +93,11 @@ def avgDailySales(total, numWeeks):
 """
     gets sales totals by week, given a set of weekly sales figures
 """
-def weeklySalesTotals(weeks, weeklySalesList):
+def weeklySalesTotals(weeklySalesList):
     result = []
     index = 0
 
-    while index < weeks:
+    while index < len(weeklySalesList):
         result.append(sum(weeklySalesList[index]))
         index += 1
     return result

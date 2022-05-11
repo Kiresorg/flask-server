@@ -241,10 +241,11 @@ class CalculateTotals(Resource):
         req_data = request.get_json()
         _weeks = int(req_data.get("weeks"))
 
-        """ get ALL SALES from the database """
-        sales_records = getSalesFigures() 
+        """
+            one approach: change the getSalesFigures function to return only a specified # of weeks of data
+        """
+        sales_records = getSalesFigures(_weeks)
 
-
-        weeklyTotals = weeklySalesTotals(_weeks, sales_records)
+        weeklyTotals = weeklySalesTotals(sales_records)
 
         return json.dumps(weeklyTotals), 200

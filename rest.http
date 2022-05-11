@@ -43,5 +43,5 @@ POST  http://localhost:5000/api/sales/weekly
 Content-Type: application/json
 
 {
-    "weeks": "2"
+    "weeks": "-40"
 }

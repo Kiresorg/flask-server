@@ -1,6 +1,6 @@
 import unittest
 
-from controllers import avgDailySales, sumWeeklySalesFigures
+from controllers import avgDailySales, sumWeeklySalesFigures, weeklySalesTotals
 
 class TestWeeklySum(unittest.TestCase):
     def test_returns_sum_with_sales_data(self):
@@ -122,4 +122,19 @@ class TestAverageDailySales(unittest.TestCase):
             assert
         """
         expected = 0
+        self.assertEqual(actual, expected)
+class TestWeeklySalesTotal(unittest.TestCase):
+    def test_get_weekly_total_success(self):
+        """ arrange """
+        fake_sales_data = [
+            [100, 100, 100, 100, 100, 100, 100],
+            [200, 200, 200, 200, 200, 200, 200]
+        ]
+
+        """ act """
+        actual = weeklySalesTotals(fake_sales_data)
+        expected = [700, 1400]
+
+
+        """ assert """
         self.assertEqual(actual, expected)
