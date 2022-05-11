@@ -7,9 +7,9 @@ POST http://localhost:5000/api/users/register
 Content-Type: application/json
 
 {
-    "username": "erik",
+    "username": "dave",
     "password": "password",
-    "email": "erik@foobar2.com"
+    "email": "dave@foobar.com"
 }
 
 ### Login
@@ -18,7 +18,7 @@ Content-Type: application/json
 
 {
     "password":"password", 
-    "email":"erik@foobar2.com"
+    "email":"dave@foobar.com"
 }
 
 ### Get sales totals for a given number of weeks, cumulative (uses one large function)
