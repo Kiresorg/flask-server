@@ -221,7 +221,7 @@ class CalculateTotals(Resource):
         _weeks = int(req_data.get("weeks"))
 
         """ call the dB to get sales figures"""
-        sales_records = getSalesFigures(_weeks)
+        sales_records = getSalesFigures()
 
         """ get total sales durign that period"""
         total = sumWeeklySalesFigures(_weeks, sales_records)
@@ -241,7 +241,10 @@ class CalculateTotals(Resource):
         req_data = request.get_json()
         _weeks = int(req_data.get("weeks"))
 
-        sales_records = getSalesFigures(_weeks)
-        weeklyTotals = weeklySalesTotals(sales_records)
+        """ get ALL SALES from the database """
+        sales_records = getSalesFigures() 
+
+
+        weeklyTotals = weeklySalesTotals(_weeks, sales_records)
 
         return json.dumps(weeklyTotals), 200
