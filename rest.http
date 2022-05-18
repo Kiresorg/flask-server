@@ -26,7 +26,7 @@ POST  http://localhost:5000/api/sales/totals
 Content-Type: application/json
 
 {
-    "weeks": "9"
+    "weeks": "3"
 }
 
 ### Get sales totals for a given number of weeks, cumulative (uses small testable units)
@@ -34,7 +34,7 @@ POST  http://localhost:5000/api/sales/totals2
 Content-Type: application/json
 
 {
-    "weeks": "8"
+    "weeks": "3"
 }
 
 ### Get sales total by week, for a given number of weeks

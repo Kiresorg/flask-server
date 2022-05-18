@@ -22,7 +22,7 @@ class TestWeeklySum(unittest.TestCase):
         """
             assert
         """
-        expected = 1400
+        expected = 2100
         self.assertEqual(actual, expected)
     
     def test_returns_zero_with_no_data(self):
