@@ -221,7 +221,7 @@ class CalculateTotals(Resource):
         _weeks = int(req_data.get("weeks"))
 
         """ call the dB to get sales figures"""
-        sales_records = getSalesFigures()
+        sales_records = getSalesFigures(_weeks)
 
         """ get total sales durign that period"""
         total = sumWeeklySalesFigures(_weeks, sales_records)
