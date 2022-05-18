@@ -9,10 +9,10 @@ class TestWeeklySum(unittest.TestCase):
         """
         mock_sales_figures = [
             [100, 100, 100, 100, 100, 100, 100],
-            [100, 100, 100, 100, 100, 100, 100],
-            [100, 100, 100, 100, 100, 100, 100]
+            [200, 200, 200, 200, 200, 200, 200],
+            [300, 300, 300, 300, 300, 300, 300]
         ]
-        mock_weeks = 3
+        mock_weeks = 2
 
         """
             act
@@ -22,7 +22,7 @@ class TestWeeklySum(unittest.TestCase):
         """
             assert
         """
-        expected = 2100
+        expected = 1400
         self.assertEqual(actual, expected)
     
     def test_returns_zero_with_no_data(self):
